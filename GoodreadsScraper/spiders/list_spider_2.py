@@ -19,12 +19,14 @@ class ListSpider(scrapy.Spider):
    # goodreads_list_url = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=100"
     goodreads_list_url = "https://www.goodreads.com/list/show/{}?page={}"
 
-    def __init__(self, list_name, start_page_no, end_page_no):
+    def __init__(self, list_name):
+        #__init__(self, list_name, start_page_no, end_page_no):
         super().__init__()
         self.book_spider = BookSpider()
 
         self.start_urls = []
-        for page_no in range(int(start_page_no), int(end_page_no) + 1):
+        for page_no in range(int(1), int(1) + 1):
+        #for page_no in range(int(start_page_no), int(end_page_no) + 1):
             list_url = self.goodreads_list_url.format(list_name, page_no)
             self.start_urls.append(list_url)
 
