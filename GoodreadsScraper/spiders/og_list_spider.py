@@ -13,7 +13,7 @@ class ListSpider(scrapy.Spider):
 
         This subsequently passes on the URLs to BookSpider
     """
-    name = "newlist"
+    name = "list"
 
     ##"https://www.goodreads.com/list/show/1.Best_Books_ever?page=1"
     goodreads_list_url = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=100"
