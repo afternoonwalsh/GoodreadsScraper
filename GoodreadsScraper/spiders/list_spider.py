@@ -4,9 +4,9 @@ import scrapy
 
 from .book_spider import BookSpider
 
-#GOODREADS_URL_PREFIX = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=infinite"
+GOODREADS_URL_PREFIX = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=infinite"
 #"https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&ref=nav_mybooks&per_page=100"
-GOODREADS_URL_PREFIX = "https://www.goodreads.com"
+#GOODREADS_URL_PREFIX = "https://www.goodreads.com"
 
 class ListSpider(scrapy.Spider):
     """Extract URLs of books from a Listopia list on Goodreads
@@ -16,12 +16,14 @@ class ListSpider(scrapy.Spider):
     name = "newlist"
 
     ##"https://www.goodreads.com/list/show/1.Best_Books_ever?page=1"
-    #goodreads_list_url = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=100"
-    goodreads_list_url = "https://www.goodreads.com/list/show/{}?page={}"
+    goodreads_list_url = "https://www.goodreads.com/review/list/62446163-patrick-walsh?utf8=%E2%9C%93&utf8=%E2%9C%93&ref=nav_mybooks&title=patrick-walsh&per_page=100"
+    #goodreads_list_url = "https://www.goodreads.com/list/show/{}?page={}"
 
     def __init__(self, list_name, start_page_no, end_page_no):
         super().__init__()
         self.book_spider = BookSpider()
+        start_page_no = 1
+        end_page_no = 1
 
         self.start_urls = []
         for page_no in range(int(start_page_no), int(end_page_no) + 1):
