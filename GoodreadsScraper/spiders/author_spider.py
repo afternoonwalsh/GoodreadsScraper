@@ -13,7 +13,8 @@ class AuthorSpider(scrapy.Spider):
         super().__init__()
         self.author_crawl = author_crawl.lower() in {"true", "yes", "y"}
         if self.author_crawl:
-            self.start_urls = ["https://www.goodreads.com/", "https://www.goodreads.com/author/on_goodreads"]
+            self.start_urls = ["https://www.goodreads.com/review/list/62446163?ref=nav_mybooks"]
+            #self.start_urls = ["https://www.goodreads.com/", "https://www.goodreads.com/author/on_goodreads"]
 
     def parse(self, response):
         url = response.request.url
@@ -22,6 +23,7 @@ class AuthorSpider(scrapy.Spider):
         if "/blog?page=" in url:
             return
 
+        #if url.startswith("https://www.goodreads.com/review/list/62446163?ref=nav_mybooks/"):
         if url.startswith("https://www.goodreads.com/author/show/"):
             yield self.parse_author(response)
 
