@@ -62,4 +62,7 @@ class AuthorSpider(scrapy.Spider):
 
         loader.add_css("about", 'div.aboutAuthorInfo')
 
+        loader.add_css('img_url', 'img[itemprop="image"]::attr(src)')
+        loader.add_xpath('birthplace','/html/body/div[2]/div[3]/div[1]/div[2]/div[3]/div[2]/text()[5]')
+
         return loader.load_item()

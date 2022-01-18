@@ -1,0 +1,39 @@
+# outer_join = pd.merge(dfb,dfr,left_on='url', right_on='url_full', how='outer', indicator=True)
+# anti_join = outer_join[~(outer_join._merge == 'both')].drop('_merge', axis = 1)
+#anti_join['url_full'][55]
+# outer_join.to_csv('outer.csv')
+#dfb['shelf'].unique()
+#dfb[dfb['author']=='E.M. Forster']
+#dfbr.columns
+#pd.isna(dfbr['awards'][2])
+dfbr.columns
+#dfbr['rating_histogram'][0][3]
+#type(dfbr['rating_histogram'][0])
+#dfbr['rating_histogram'][0]['5']
+# dfbr[['1_star_ratings', '2_star_ratings','3_star_ratings','4_star_ratings','5_star_ratings']]
+#dfg[dfg['genre'].isna()]
+#dfg['genre'].to_csv('genre.csv')
+#dfbr['genres'][dfbr['genres'].isna()==False]
+# dfbr['genres'][dfbr['genres'].isna()]
+# if type(dfbr['genres'][25]) == float:
+#     print('empty')
+# else:
+#     print(dfbr['genres'][25],'no')
+#test = dfbr['my_rating'][dfbr['my_rating'].isna()==False]
+#dfb[dfb.places!='NaN']
+#dfb[dfb.places.notnull()]
+#dfb[dfb.asin.notnull()]
+#dfa[dfa.birth_date.notnull()]
+#dfr.describe()
+#dfa['birth_date'][dfa['birth_date'].isna() == False]
+#dfbr['my_review'][dfbr['my_review']!= 'not reviewed']
+#dfbr[dfbr['']]
+#dfbr['my_review'][11]
+# x = pd.to_datetime('2018-01-05',format="%Y/%m/%d")
+# x
+##.replace('â€œ','')
+##â€, <br>, â€”
+##my_new_string = re.sub('[^a-zA-Z0-9 \n\.]', '', my_str)
+new_dates = []
+new_dates.append([publish_date_new, my_review_date_added_new, my_review_date_read_new])
+new_dates

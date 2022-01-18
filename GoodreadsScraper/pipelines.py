@@ -15,7 +15,7 @@ class JsonLineItemSegregator(object):
         return cls(crawler, output_file_suffix)
 
     def __init__(self, crawler, output_file_suffix):
-        self.types = {"book", "author"}
+        self.types = {"book", "author", "review"}
         self.output_file_suffix = output_file_suffix
         self.files = set()
         crawler.signals.connect(self.spider_opened, signal=signals.spider_opened)

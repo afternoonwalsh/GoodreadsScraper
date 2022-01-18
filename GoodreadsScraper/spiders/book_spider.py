@@ -45,10 +45,18 @@ class BookSpider(scrapy.Spider):
         loader.add_css('isbn13', 'div.infoBoxRowItem[itemprop=isbn]::text')
         loader.add_css('isbn13', 'span[itemprop=isbn]::text')
         loader.add_css('isbn13', 'div.infoBoxRowItem::text')
+        
+        #loader.add_css('shelf', '#imagecol>.wtrButtonContainer>div>form>button::attr(class)')
 
         loader.add_css('rating_histogram', 'script[type*="protovis"]::text')
+
+        loader.add_css('img_url','#coverImage::attr(src)')
 
         yield loader.load_item()
 
         author_url = response.css('a.authorName::attr(href)').extract_first()
         yield response.follow(author_url, callback=self.author_spider.parse)
+
+
+
+
