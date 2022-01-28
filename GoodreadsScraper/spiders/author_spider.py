@@ -12,9 +12,9 @@ class AuthorSpider(scrapy.Spider):
         # since command line arguments to scrapy are strings
         super().__init__()
         self.author_crawl = author_crawl.lower() in {"true", "yes", "y"}
+        open("author_.jl",'w').close()
         if self.author_crawl:
             self.start_urls = ["https://www.goodreads.com/review/list/62446163?ref=nav_mybooks"]
-            #self.start_urls = ["https://www.goodreads.com/", "https://www.goodreads.com/author/on_goodreads"]
 
     def parse(self, response):
         url = response.request.url

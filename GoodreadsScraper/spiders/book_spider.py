@@ -12,6 +12,7 @@ class BookSpider(scrapy.Spider):
     def __init__(self):
         super().__init__()
         self.author_spider = AuthorSpider()
+        open("book_.jl",'w').close()
 
     def parse(self, response):
         loader = BookLoader(BookItem(), response=response)
@@ -46,8 +47,6 @@ class BookSpider(scrapy.Spider):
         loader.add_css('isbn13', 'span[itemprop=isbn]::text')
         loader.add_css('isbn13', 'div.infoBoxRowItem::text')
         
-        #loader.add_css('shelf', '#imagecol>.wtrButtonContainer>div>form>button::attr(class)')
-
         loader.add_css('rating_histogram', 'script[type*="protovis"]::text')
 
         loader.add_css('img_url','#coverImage::attr(src)')

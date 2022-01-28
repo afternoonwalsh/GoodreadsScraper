@@ -37,3 +37,83 @@ dfbr.columns
 new_dates = []
 new_dates.append([publish_date_new, my_review_date_added_new, my_review_date_read_new])
 new_dates
+#book_genres
+#dfg.sort_values('book_count', ascending=False).head(10)
+#dfbr[dfbr['genres'].str.contains('Adult Fiction')]
+#dfbr[dfbr['genres'].str.contains('Fiction', na=False)]
+#dfbr[dfbr['genres'].str.contains('Mythology').isna() == False]
+#type(dfbr['genres'][0])
+#(dfbr[['genres', 'title']][dfbr['genres'].apply(lambda x: 'Adult Fiction' in str(x))]).to_csv('check.csv')
+## 01/20/22
+# import datetime
+#pd.DatetimeIndex(dfbr['publish_date_new']).year
+#dfbr['publish_date_new'][dfbr['publish_date_new'].isna()==False]
+#dfbr['title'][dfbr['publish_date_new'].isna()==False][dfbr['publish_date_new']==datetime.date(1,1,1)]
+#dfbr['title'][dfbr['publish_date_new']==datetime.date(1,1,1)]
+#filter on date:
+#dfbr['title'][dfbr['publish_date_new']==datetime.date(2014,5,6)]
+#pd.DatetimeIndex(dfbr['publish_date_new'][dfbr['publish_date_new']!=datetime.date(1,1,1)]).year
+# datetime.date(1,1,1)
+#pd.DatetimeIndex(dfbr['publish_date_new']).year
+#dfbr['publish_date_new'].sort_values()
+#dfc[dfc['id']==3]
+# dfbr['5_to_1_ratio'][49]
+# dfb[['title','rating_histogram']].iloc[49]
+# dfbr['5_star_ratings']
+# dfbr['5_star_ratings'][49]/dfbr['1_star_ratings'][49]
+# if dfbr['1_star_ratings']: print('yay')
+# else: print('nay')
+#dfb.columns
+#dfbr['5_to_1_ratio'][49]
+
+1/25/22
+#dfbr.head()
+#single iterable with if statements within them
+
+GENRE DATASET CREATION (removed)
+###first, create list of unique genres
+df_gen = dfbr.explode('genres')
+genre_set = set(list(df_gen['genres']))
+
+###create a dataframe and generate a new field in it that has a count for each book that mentions that genre
+dfg = pd.DataFrame(genre_set, columns=['genre'])
+dfg.sort_values('genre')
+dfg['book_count'] = 0
+dfg = dfg.dropna()
+
+for i,r in dfbr.iterrows():
+    if r['genres']:
+        #print(dfg['book_count'][0])
+        book_genres = r['genres']
+        if type(book_genres) != float:
+            for i,r in dfg.iterrows():
+                if pd.isna(r['genre']):
+                    pass
+                elif r['genre'] in book_genres:
+                    #print(r['genre'], type(r['genre']))
+                    dfg['book_count'][i] += 1
+                else:
+                    pass
+        else:
+            pass
+    else:
+        pass
+
+## genres
+dfg.to_csv('genre.csv')
+
+#01/27/2022 removed my_review extract from items
+# excluding for now, needs bug fix 
+def extract_my_review(txt):
+    empty_review_text = '<td class="field review" style="display: none"><label>review</label><div class="value">\n            <span class="greyText">None</span>\n    <div class="clear"></div>\n</div></td>'
+
+    if empty_review_text not in txt:
+        try:
+            #txt = txt[0]
+            txt = re.search('(?<="display:none">).*?(?=<\/span)',str(txt)).group(0)
+            return txt.strip #.group(0)
+        except:
+            txt = re.search('(?<="freeTextContainerreview\d\d\d\d\d\d\d\d\d\d">).*?(?=<\/span)',str(txt)).group(0)
+            return txt.strip       
+    else:
+         return 'not reviewed'

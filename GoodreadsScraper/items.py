@@ -90,42 +90,9 @@ def filter_empty(vals):
 def split_by_newline(txt):
     return txt.split("\n")
 
-def extract_my_review(txt):
-    #txt = str(txt) 
-    #txt = re.search('(?<="display:none">).*?(?=<\/span)',str(txt))#.group(0)
-    empty_review_text = '<td class="field review" style="display: none"><label>review</label><div class="value">\n            <span class="greyText">None</span>\n    <div class="clear"></div>\n</div></td>'
-    #free_text = 'freeTextreview'
-    #txt1 = re.search('.*?',str(txt)).group(0)
-    #txt1 = re.search('(?<="freeTextContainerreview\d\d\d\d\d\d\d\d\d\d">).*?(?=<\/span)',str(txt)).group(0)
-    #return txt1
-
-    if empty_review_text not in txt:
-        try:
-            #txt = txt[0]
-            txt = re.search('(?<="display:none">).*?(?=<\/span)',str(txt)).group(0)
-            return txt.strip #.group(0)
-        except:
-            txt = re.search('(?<="freeTextContainerreview\d\d\d\d\d\d\d\d\d\d">).*?(?=<\/span)',str(txt)).group(0)
-            return txt.strip       
-    else:
-         return 'not reviewed'
-
-    #     if empty_review_text not in txt:
-    #     if free_text in txt:
-    #         #txt = txt[0]
-    #         txt = re.search('(?<="display:none">).*?(?=<\/span)',str(txt)).group(0)
-    #         return txt #.group(0)
-    #     else:
-    #         txt = re.search('(?<="freeTextContainerreview\d\d\d\d\d\d\d\d\d\d">).*?(?=<\/span)',str(txt)).group(0)
-    #         #return "bb" #txt
-    # else:
-    #     return 'not reviewed'
-
 def extract_my_rating(txt):
     if txt:
-        #txt = txt[0]
-        #re.search('(?<=>).*(?=<)',txt)
-        return txt #.group(0)
+        return txt
     else:
         return 'not rated'
 
@@ -136,11 +103,6 @@ def extract_shelf(url):
         return url2
     else:
         return 'none'
-
-# def extract_shelf_list(lst):
-#     url_prefix = 'https://www.goodreads.com/'
-#     for shelf in lst:
-#         shelf_url = url_prefix + re.match(,shelf).group(0)
 
 class BookItem(scrapy.Item):
     # Scalars
@@ -212,13 +174,9 @@ class AuthorLoader(ItemLoader):
 
 class ReviewItem(scrapy.Item):
     url = Field()
-    my_rating = Field() #Field(input_processor=extract_my_rating) #str.strip, num_page_extractor, int)
-    #my_shelves = Field(output_processor=Identity())
-    my_review = Field(input_processor=extract_my_review)
-    my_review_1 = Field()
+    my_rating = Field()
     my_review_date_read = Field(input_processor=MapCompose(safe_parse_date))
     my_review_date_added = Field(input_processor=MapCompose(safe_parse_date))
-    #my_review_date_read_1 = Field()
     shelf = Field(input_processor=extract_shelf)
 
 class ReviewLoader(ItemLoader):
