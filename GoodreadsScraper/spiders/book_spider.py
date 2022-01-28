@@ -1,3 +1,5 @@
+# Modified version of havanagrawal's original Goodreads Scraper: https://github.com/havanagrawal/GoodreadsScraper
+
 """Spider to extract information from a /book/show type page on Goodreads"""
 
 import scrapy

@@ -1,3 +1,5 @@
+# Modified version of havanagrawal's original Goodreads Scraper: https://github.com/havanagrawal/GoodreadsScraper
+
 # -*- coding: utf-8 -*-
 
 # Define here the models for your scraped items

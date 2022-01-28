@@ -1,3 +1,5 @@
+# Modified version of havanagrawal's original Goodreads Scraper: https://github.com/havanagrawal/GoodreadsScraper
+
 """Spider to extract URL's of books from a Listopia list on Goodreads"""
 
 from selenium import webdriver
