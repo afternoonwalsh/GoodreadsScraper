@@ -8,6 +8,8 @@
 <h5>A full-fledged web crawler for Goodreads</h5>
 </div>
 
+Note: this repo is forked from havanagrawal's work and edited by me, afternoonwalsh :) Thank you havanagrawal!
+
 A small Python project to pull data from Goodreads using Scrapy and Selenium
 
 ## Table of Contents
